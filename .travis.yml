@@ -9,7 +9,7 @@ python:
 # command to install dependencies
 install:
   - pip install -r test-requirements.txt
-  - pip install python-coveralls
+  - pip install -U python-coveralls
 # command to run tests
 script:
   - pytest -v --cov-report term --cov-report html
