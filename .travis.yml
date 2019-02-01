@@ -14,4 +14,4 @@ install:
 script:
   - pytest -v --cov . --cov-report term --cov-report html
 after_success:
-  - coveralls
+  - if [[ `python --version` =~ 3.7 ]]; then coveralls fi
