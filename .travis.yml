@@ -11,7 +11,12 @@ install:
   - pip install coveralls
   - pip install -r test-requirements.txt
 # command to run tests
-script:
-  - pytest -v --cov . --cov-report term --cov-report html
+jobs:
+  include:
+    - stage: check code style
+      script: pycodestyle --show-source --show-pep8
+    - stage: run unit test
+      script:
+        - pytest -v --cov . --cov-report term --cov-report html
 after_success:
   - if [[ `python --version` =~ 3.7 ]]; then coveralls; fi
