@@ -1,4 +1,6 @@
 dist: xenial
+services:
+  - docker
 language: python
 python:
   - "2.7"
@@ -10,6 +12,8 @@ python:
 install:
   - pip install coveralls
   - pip install -r test-requirements.txt
+before_script:
+  - bash setup_container.sh start
 # command to run tests
 jobs:
   include:
@@ -20,3 +24,5 @@ jobs:
         - pytest -v --cov . --cov-report term --cov-report html
 after_success:
   - if [[ `python --version` =~ 3.7 ]]; then coveralls; fi
+after_script:
+  - bash setup_container.sh stop
